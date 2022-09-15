@@ -1,9 +1,18 @@
 #!/bin/sh 
 
+
+cp tests/data/ / -rf
+
+cp /var/lib/rpm /var/lib/rpm.bak -rf
 cd tests
 
 # add the debugedit
 PATH=$PATH:/usr/lib64/rpm/
 
+
+RPMTEST='./'
+
 ./rpmtests
 
+rm /var/lib/rpm -rf 
+cp /var/lib/rpm.bak /var/lib/rpm -rf
