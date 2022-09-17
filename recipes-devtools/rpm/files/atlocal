@@ -1,0 +1,25 @@
+RPMTEST='/'
+export RPMTEST
+
+RPMDATA='/data'
+export RPMDATA
+
+PYTHON_DISABLED=false
+export PYTHON_DISABLED
+
+PYTHON='python3'
+export PYTHON
+
+RPM_CONFIGDIR='/usr/lib64/rpm'
+export RPM_CONFIGDIR
+
+DBFORMAT=$(awk '/^%_db_backend/{print $2}' "/usr/lib64/rpm/macros");
+export DBFORMAT
+
+TOPDIR="/build"
+
+function run()
+{
+     "$@" --define "_buildhost testhost" --define "_tmppath ${RPMTEST}/tmp" --define "_topdir ${TOPDIR}" --define "_db_backend ${DBFORMAT}" --dbpath="${RPMTEST}/var/lib/rpm/"
+}
+
