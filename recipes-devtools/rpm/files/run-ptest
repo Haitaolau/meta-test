@@ -1,18 +1,66 @@
 #!/bin/sh 
 
 
-cp tests/data/ / -rf
+#cp tests/data/ / -rf
 
-cp /var/lib/rpm /var/lib/rpm.bak -rf
-cd tests
+#cp /var/lib/rpm /var/lib/rpm.bak -rf
+#cd tests
 
 # add the debugedit
-PATH=$PATH:/usr/lib64/rpm/
+#PATH=$PATH:/usr/lib64/rpm/
 
 
-RPMTEST='./'
+#RPMTEST='./'
 
-./rpmtests
+#./rpmtests
 
-rm /var/lib/rpm -rf 
-cp /var/lib/rpm.bak /var/lib/rpm -rf
+#rm /var/lib/rpm -rf 
+#cp /var/lib/rpm.bak /var/lib/rpm -rf 
+
+PATH_BAK=$PATH
+
+cd tests
+
+if [ -d testing ]; then chmod -R u+w testing/; fi
+rm -rf testing
+mkdir -p testing//usr/bin
+ln -s .//usr/bin testing/bin
+mkdir -p testing/usr
+ln -s ../bin testing/usr/bin
+
+cp ./data ./testing/ -rf
+#cp ./usr ./testing/ -rf
+mkdir -p testing/usr/include/rpm
+mkdir -p testing/usr/lib64/
+mkdir -p testing/usr/lib64/pkgconfig/
+mkdir -p testing/usr/lib64/rpm/
+mkdir -p testing/usr/lib64/rpm-plugins/
+mkdir -p testing/usr/lib64/python3.9/site-packages/rpm/
+
+cp /usr/bin/rpm* testing/usr/bin/ -rf
+cp /usr/include/rpm/* testing/usr/include/rpm -rf
+cp /usr/lib64/librpm* testing/usr/lib64/ -rf
+cp /usr/lib64/pkgconfig/rpm.pc  testing/usr/lib64/pkgconfig/ -rf
+cp /usr/lib64/python3.9/site-packages/rpm/* testing/usr/lib64/python3.9/site-packages/rpm/ -rf
+cp /usr/lib64/rpm-plugins/ testing/usr/lib64/ -rf
+
+ls /usr/lib64/rpm/ -I 'ptest' | xargs -i cp -rf  /usr/lib64/rpm/{}  testing/usr/lib64/rpm/
+
+for d in dev etc magic tmp var; do if [ ! -d testing/${d} ]; then mkdir testing/${d}; fi; done
+
+for node in urandom stdin stderr stdout null full; do ln -s /dev/${node} testing/dev/${node}; done
+
+for cf in hosts resolv.conf passwd shadow group gshadow mtab ; do [ -f /etc/${cf} ] && ln -s /etc/${cf} testing/etc/${cf}; done
+
+for prog in gzip cat patch tar sh ln chmod rm mkdir uname grep sed find file ionice mktemp nice cut sort diff touch install wc coreutils xargs; do p=`which ${prog}`; if [ "${p}" != "" ]; then ln -s ${p} testing//usr/bin/; fi; done
+
+for d in /proc /sys /selinux /etc/selinux; do if [ -d ${d} ]; then ln -s ${d} testing/${d}; fi; done
+(cd testing/magic && file -C)
+
+chmod -R u-w testing/
+
+
+./rpmtests $@
+
+PATH=$PATH_BAK
+
