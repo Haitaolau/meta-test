@@ -27,15 +27,24 @@ Table of Contents
 =================
 
   I. Adding the meta-test layer to your build
- II. Misc
-
-
+ II. Test cases
+  
 I. Adding the meta-test layer to your build
 =================================================
 
 Run 'bitbake-layers add-layer meta-test'
 
-II. Misc
+II. Test cases
 ========
+1. rpm-ptest 
+  add the following configuration to local.conf of yocto project 
+  """
+  EXTRA_IMAGE_FEATURES_append += " dbg-pkgs"
+  DISTRO_FEATURES_append = " ptest"
+  EXTRA_IMAGE_FEATURES += "ptest-pkgs"
+  IMAGE_FSTYPES_remove += " hddimg live"
+  IMAGE_INSTALL_append += " rpm-ptest ptest-runner"
+"""
+
 
 --- replace with specific information about the meta-test layer ---
