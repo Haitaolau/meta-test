@@ -18,11 +18,12 @@ do_install_ptest() {
         install ${B}/tests/atlocal ${D}${PTEST_PATH}/tests/
         install ${B}/config.h ${D}${PTEST_PATH}/tests/
         cp -rf ${S}/tests/data/* ${D}${PTEST_PATH}/tests/data/
+        sed  -i 's/PYTHON=.*/PYTHON="python3"/' ${D}${PTEST_PATH}/tests/atlocal
         sed -i 's/abs_top_builddir/abs_builddir/g' ${D}${PTEST_PATH}/tests/atlocal
         sed -i 's/abs_srcdir/abs_builddir/g' ${D}${PTEST_PATH}/tests/atlocal
         echo "at_testdir='tests'" >> ${D}${PTEST_PATH}/tests/atconfig
-        echo "abs_builddir=`pwd`" >> ${D}${PTEST_PATH}/tests/atconfig
-        echo "abs_srcdir=`pwd`" >> ${D}${PTEST_PATH}/tests/atconfig
+        echo "abs_builddir=\$(pwd)" >> ${D}${PTEST_PATH}/tests/atconfig
+        echo "abs_srcdir=\$(pwd)" >> ${D}${PTEST_PATH}/tests/atconfig
 
 }
 
