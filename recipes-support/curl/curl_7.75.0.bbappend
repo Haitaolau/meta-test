@@ -16,6 +16,7 @@ do_install_ptest(){
 	install -D ${S}/tests/*.py ${D}${PTEST_PATH}/tests/
 	install -D ${S}/tests/*.pm ${D}${PTEST_PATH}/tests/
 	install ${S}/tests/valgrind.supp ${D}${PTEST_PATH}/tests/
+	install ${B}/curl-config ${D}${PTEST_PATH}/tests/
 	install -D ${S}/tests/data/test* ${D}${PTEST_PATH}/tests/data/
 	sed -i 's/$disttests !~ \/test\$testnum\\W\// not -e "data\/test\$testnum"/' ${D}${PTEST_PATH}/tests/runtests.pl
 	sed -i '/get_disttests();/s/^/#/' ${D}${PTEST_PATH}/tests/runtests.pl
