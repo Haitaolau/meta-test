@@ -46,5 +46,20 @@ II. Test cases
   IMAGE_INSTALL_append += " rpm-ptest ptest-runner"
 """
 
+2. curl-ptest 
+"""
+  PNWHITELIST_networking-layer += 'stunnel'
+  PNWHITELIST_networking-layer += 'nghttp2'
+  PNWHITELIST_openembedded-layer += 'cunit'
+  PNWHITELIST_openembedded-layer += 'libev'
+
+  EXTRA_IMAGE_FEATURES_append += " dbg-pkgs"
+  DISTRO_FEATURES_append = " ptest"
+  EXTRA_IMAGE_FEATURES += "ptest-pkgs"
+  IMAGE_FSTYPES_remove += " hddimg live"
+  IMAGE_INSTALL_append += " curl-ptest ptest-runner"
+
+"""
+
 
 --- replace with specific information about the meta-test layer ---
