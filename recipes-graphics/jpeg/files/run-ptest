@@ -1,0 +1,61 @@
+#!/bin/bash 
+
+cd tests
+
+echo -n "tjexampletest "
+
+./tjexampletest
+
+result=$(sed -n '$p' log/tjexampletest.log)
+
+echo $result
+
+echo -n "tjbenchtest "
+
+./tjbenchtest
+
+result=$(sed -n '$p' log/tjbenchtest.log)
+
+echo $result
+
+echo -n "tjunittest "
+
+./tjunittest &> log/tjunittest.log
+
+grep "FAILED" log/tjunittest.log > /dev/null 
+
+result=$?
+
+test $result -eq 1  && echo "SUCCESS"
+test $result -eq 0  && echo "FAILED"
+
+echo -n "tjunittest-static "
+
+./tjunittest-static &> log/tjunittest-static.log 
+
+grep "FAILED" log/tjunittest-static.log > /dev/null
+
+result=$?
+
+test $result -eq 1  && echo "SUCCESS"
+test $result -eq 0  && echo "FAILED"
+
+echo -n "croptest "
+
+./croptest
+result=$(sed -n '$p' log/croptest.log)
+
+echo $result
+
+echo -n "jcstest "
+
+./jcstest &> log/jcstest.log 
+
+grep "Not working properly" log/jcstest.log > /dev/null
+
+result=$?
+
+test $result -eq 1  && echo "SUCCESS"
+test $result -eq 0  && echo "FAILED"
+
+

@@ -61,5 +61,11 @@ II. Test cases
 
 """
 
+3. libjpeg-turbo
 
+"""
+  PNWHITELIST_openembedded-layer += 'fftw'
+  PNWHITELIST_openembedded-layer += 'imagemagick'
+  PNWHITELIST_openembedded-layer += 'lcms'
+"""
 --- replace with specific information about the meta-test layer ---
