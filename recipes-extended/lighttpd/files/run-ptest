@@ -1,0 +1,19 @@
+#!/bin/bash
+
+list=$(ls tests/*)
+
+grn='\e[0;32m';
+red='\e[0;31m';
+std='\e[m';
+
+if test -n "$list"; then
+        for tst in $list; do
+        if $list; then
+           col=$grn; res=PASS
+        elif test $? -ne 77; then
+           col=$red; res=FAIL
+        fi
+        echo -e "${col}$res${std}: $tst"
+        done
+fi
+
