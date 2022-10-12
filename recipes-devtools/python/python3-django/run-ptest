@@ -1,0 +1,6 @@
+#!/bin/bash 
+
+cd tests
+pip install -e ..
+pip install -r requirements/py3.txt
+./runtests.py
