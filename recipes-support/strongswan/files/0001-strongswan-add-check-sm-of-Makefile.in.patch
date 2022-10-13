@@ -1,0 +1,133 @@
+From 883b5da8ef1d6a64d94d8282bde44067a277b12c Mon Sep 17 00:00:00 2001
+From: Liu Haitao <haitao.liu@windriver.com>
+Date: Thu, 13 Oct 2022 06:54:58 +0000
+Subject: [PATCH] strongswan: add check-sm of Makefile.in
+
+Signed-off-by: Liu Haitao <haitao.liu@windriver.com>
+---
+ src/libcharon/tests/Makefile.in                     | 3 +++
+ src/libipsec/tests/Makefile.in                      | 3 +++
+ src/libstrongswan/math/libnttfft/tests/Makefile.in  | 4 ++++
+ src/libstrongswan/plugins/bliss/tests/Makefile.in   | 3 +++
+ src/libstrongswan/plugins/newhope/tests/Makefile.in | 3 +++
+ src/libstrongswan/tests/Makefile.in                 | 3 +++
+ src/libtls/tests/Makefile.in                        | 3 +++
+ src/starter/tests/Makefile.in                       | 3 +++
+ 8 files changed, 25 insertions(+)
+
+diff --git a/src/libcharon/tests/Makefile.in b/src/libcharon/tests/Makefile.in
+index 8bfc37f..17de79c 100644
+--- a/src/libcharon/tests/Makefile.in
++++ b/src/libcharon/tests/Makefile.in
+@@ -1151,6 +1151,9 @@ distdir: $(DISTFILES)
+ 	    || exit 1; \
+ 	  fi; \
+ 	done
++check-sm: all-am
++	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
++	
+ check-am: all-am
+ 	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
+ 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
+diff --git a/src/libipsec/tests/Makefile.in b/src/libipsec/tests/Makefile.in
+index 81e04c5..5b7bf0a 100644
+--- a/src/libipsec/tests/Makefile.in
++++ b/src/libipsec/tests/Makefile.in
+@@ -769,6 +769,9 @@ distdir: $(DISTFILES)
+ 	    || exit 1; \
+ 	  fi; \
+ 	done
++check-sm: all-am
++	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
++	
+ check-am: all-am
+ 	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
+ 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
+diff --git a/src/libstrongswan/math/libnttfft/tests/Makefile.in b/src/libstrongswan/math/libnttfft/tests/Makefile.in
+index 0f8f2ad..caf5e5d 100644
+--- a/src/libstrongswan/math/libnttfft/tests/Makefile.in
++++ b/src/libstrongswan/math/libnttfft/tests/Makefile.in
+@@ -771,6 +771,10 @@ distdir: $(DISTFILES)
+ 	    || exit 1; \
+ 	  fi; \
+ 	done
++
++check-sm: all-am
++	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
++	
+ check-am: all-am
+ 	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
+ 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
+diff --git a/src/libstrongswan/plugins/bliss/tests/Makefile.in b/src/libstrongswan/plugins/bliss/tests/Makefile.in
+index 4c00254..20c5b5a 100644
+--- a/src/libstrongswan/plugins/bliss/tests/Makefile.in
++++ b/src/libstrongswan/plugins/bliss/tests/Makefile.in
+@@ -869,6 +869,9 @@ distdir: $(DISTFILES)
+ 	    || exit 1; \
+ 	  fi; \
+ 	done
++check-sm: all-am
++	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
++	
+ check-am: all-am
+ 	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
+ 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
+diff --git a/src/libstrongswan/plugins/newhope/tests/Makefile.in b/src/libstrongswan/plugins/newhope/tests/Makefile.in
+index 4033526..39201df 100644
+--- a/src/libstrongswan/plugins/newhope/tests/Makefile.in
++++ b/src/libstrongswan/plugins/newhope/tests/Makefile.in
+@@ -812,6 +812,9 @@ distdir: $(DISTFILES)
+ 	    || exit 1; \
+ 	  fi; \
+ 	done
++check-sm: all-am
++	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
++
+ check-am: all-am
+ 	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
+ 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
+diff --git a/src/libstrongswan/tests/Makefile.in b/src/libstrongswan/tests/Makefile.in
+index 9345435..792e07b 100644
+--- a/src/libstrongswan/tests/Makefile.in
++++ b/src/libstrongswan/tests/Makefile.in
+@@ -1580,6 +1580,9 @@ distdir: $(DISTFILES)
+ 	    || exit 1; \
+ 	  fi; \
+ 	done
++check-sm: all-am
++	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS) $(check_LTLIBRARIES)
++
+ check-am: all-am
+ 	$(MAKE) $(AM_MAKEFLAGS) $(check_LTLIBRARIES) $(check_PROGRAMS)
+ 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
+diff --git a/src/libtls/tests/Makefile.in b/src/libtls/tests/Makefile.in
+index 801d51a..526efc2 100644
+--- a/src/libtls/tests/Makefile.in
++++ b/src/libtls/tests/Makefile.in
+@@ -807,6 +807,9 @@ distdir: $(DISTFILES)
+ 	    || exit 1; \
+ 	  fi; \
+ 	done
++check-sm: all-am
++	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
++	
+ check-am: all-am
+ 	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
+ 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
+diff --git a/src/starter/tests/Makefile.in b/src/starter/tests/Makefile.in
+index 1880d53..005798d 100644
+--- a/src/starter/tests/Makefile.in
++++ b/src/starter/tests/Makefile.in
+@@ -768,6 +768,9 @@ distdir: $(DISTFILES)
+ 	    || exit 1; \
+ 	  fi; \
+ 	done
++check-sm: all-am
++	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
++	
+ check-am: all-am
+ 	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
+ 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
+-- 
+2.31.1
+

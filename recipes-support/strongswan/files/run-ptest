@@ -1,0 +1,5 @@
+#!/bin/bash 
+
+./libstrongswan/libstrongswan_tests
+./libcharon/libcharon_tests
+./libcharon/exchange_tests
