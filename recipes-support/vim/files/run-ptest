@@ -1,0 +1,3 @@
+#!/bin/bash 
+
+vim --clean --not-a-term -u testdir/runtest.vim
