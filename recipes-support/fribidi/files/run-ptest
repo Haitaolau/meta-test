@@ -1,0 +1,56 @@
+#!/bin/bash 
+
+cd tests
+
+if test -z "$top_builddir"; then
+  top_builddir=..
+fi
+
+if test -z "$srcdir"; then
+  srcdir=`echo "$0" | sed 's,/[^/]*$,,'`
+fi
+
+test "${VERBOSE+set}" != "set" && VERBOSE=yes
+
+# See how redirections should work.
+if test -z "$VERBOSE"; then
+   exec > /dev/null 2>&1
+fi
+
+
+TEST () {
+  testcase="$1"
+  test="${testcase##*/}"
+  test="${test%.input}"
+  charset="${testcase#*_}"
+  charset="${charset%%_*}"
+  echo -n "=== $test === "
+  if ! "fribidi" --charset "$charset" </dev/null >/dev/null 2>&1; then
+    echo " [Character set not supported]"
+    return 0
+  fi
+  "fribidi" --test --charset "$charset" "$testcase" > "$test.output"
+
+  reference="${testcase%.input}.reference";
+  test -f "$reference" || reference="tests/${reference##*/}"
+  if diff -U 0 "$test.output" "$reference"; then
+    rm "$test.output"
+    echo " [Passed]"
+    return 0
+  else
+    echo " [Failed]"
+    return 1
+  fi
+}
+
+retval=0
+for testcase in "$srcdir"/test_*.input; do
+  TEST "$testcase" || retval=1
+done
+
+./BidiCharacterTest BidiCharacterTest.txt 
+
+./BidiTest BidiTest.txt
+
+exit $retval
+

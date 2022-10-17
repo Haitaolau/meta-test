@@ -68,4 +68,5 @@ II. Test cases
   PNWHITELIST_openembedded-layer += 'imagemagick'
   PNWHITELIST_openembedded-layer += 'lcms'
 """
+
 --- replace with specific information about the meta-test layer ---
