@@ -1,0 +1,7 @@
+#!/bin/bash 
+
+cd tests
+ln -s /usr/bin/bsdcat ./bsdcat 
+ln -s /usr/bin/bsdcpio ./bsdcpio 
+ln -s /usr/bin/bsdtar ./bsdtar
+make check-TESTS
