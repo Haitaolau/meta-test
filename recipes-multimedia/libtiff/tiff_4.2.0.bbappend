@@ -26,6 +26,7 @@ do_install_ptest(){
 		cp ${S}/test/*.sh ${D}${PTEST_PATH}/tests/ -rf
 		cp ${S}/test/images ${D}${PTEST_PATH}/tests/ -rf
 		sed -i "s/TOOLS=.*/TOOLS='\/usr\/bin'/" ${D}${PTEST_PATH}/tests/common.sh
+		cp ${S}/test/refs ${D}${PTEST_PATH}/tests/ -rf
 }
 
 FILES_${PN}-ptest += "${bindir}/thumbnail"
@@ -33,3 +34,4 @@ FILES_${PN}-ptest += "${bindir}/rgb2ycbcr"
 
 RDEPENDS_${PN}-ptest += "bash"
 RDEPENDS_${PN}-ptest += "make"
+RDEPENDS_${PN}-ptest += "gcc"
