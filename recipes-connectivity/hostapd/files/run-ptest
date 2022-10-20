@@ -1,0 +1,13 @@
+#!/bin/bash 
+
+cd tests
+
+./test-aes
+./test-list
+./test-md4
+./test-milenage
+./test-rsa-sig-ver
+./test-sha1
+./test-sha256
+echo "All tests completed successfully."
+
