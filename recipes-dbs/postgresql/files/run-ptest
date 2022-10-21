@@ -1,0 +1,23 @@
+#!/bin/bash
+
+
+if [ $(id -u) -eq 0 ] 
+then
+
+	echo "Do not run this script as root"
+	exit 1;
+fi
+
+PWDD=$(pwd)
+
+cd $PWDD/tests/isolation/
+./pg_isolation_regress --schedule=isolation_schedule
+
+
+cd $PWDD/tests/regress/
+
+mkdir testtablespace
+
+./pg_regress --dlpath=. --max-concurrent-tests=20 --schedule=parallel_schedule
+
+
