@@ -1,6 +1,5 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI += "file://run-ptest \
-			file://0001-tests-stop-testing-git-rebase-preserve-merges.patch \
             "
 
 inherit ptest
