@@ -1,6 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI += "file://run-ptest \
             file://GUNMakefile \
+            file://Makefile \
             "
 
 inherit ptest
@@ -20,6 +21,15 @@ do_install_ptest(){
 	  install ${S}/build-aux/test-driver ${D}${PTEST_PATH}/gnulib-tests/
 	  install ${S}/build-aux/update-copyright ${D}${PTEST_PATH}/gnulib-tests/
 	  install ${S}/build-aux/vc-list-files ${D}${PTEST_PATH}/gnulib-tests/
+
+
+      install -d ${D}${PTEST_PATH}/tests/
+	  cp ${WORKDIR}/Makefile ${D}${PTEST_PATH}/tests/Makefile
+	  install ${S}/tests/init.sh ${D}${PTEST_PATH}/tests/
+	  cp ${S}/tests/find ${D}${PTEST_PATH}/tests/ -rf
+	  cp ${S}/tests/misc ${D}${PTEST_PATH}/tests/ -rf
+	  cp ${S}/tests/xargs ${D}${PTEST_PATH}/tests/ -rf
+
 
 }
 

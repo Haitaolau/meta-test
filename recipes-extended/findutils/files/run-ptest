@@ -1,5 +1,9 @@
 #!/bin/bash 
 
-cd tests
+PWD=$(PWD)
+cd ${PWD}/gnulib-tests
+make -k check-TESTS top_srcdir=. srcdir=. abs_aux_dir=$(pwd)
 
-make check-TESTS
+cd ${PWD}/tests
+
+make -k check-TESTS
