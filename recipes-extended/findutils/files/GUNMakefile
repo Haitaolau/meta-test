@@ -1,3 +1,26 @@
+TESTS_ENVIRONMENT = EXEEXT='' srcdir='$(srcdir)' \
+	LOCALE_FR='fr_FR' LOCALE_FR_UTF8='none' \
+	LOCALE_FR='fr_FR' LOCALE_TR_UTF8='none' \
+	LOCALE_FR='fr_FR' LOCALE_FR_UTF8='none' \
+	LOCALE_JA='none' LOCALE_ZH_CN='none' \
+	LOCALE_FR='fr_FR' LOCALE_FR_UTF8='none' \
+	LOCALE_JA='none' LOCALE_ZH_CN='none' \
+	LOCALE_FR='fr_FR' LOCALE_FR_UTF8='none' \
+	LOCALE_JA='none' LOCALE_ZH_CN='none' \
+	LOCALE_FR_UTF8='none' \
+	LOCALE_TR_UTF8='none' \
+	LOCALE_ZH_CN='none' \
+	LOCALE_FR_UTF8='none' LOCALE_FR='fr_FR' \
+	LOCALE_FR_UTF8='none' LOCALE_JA='none' \
+	LOCALE_ZH_CN='none' \
+	LOCALE_FR_UTF8='none' \
+	LOCALE_ZH_CN='none' LOCALE_FR='fr_FR' \
+	LOCALE_FR_UTF8='none' LOCALE_FR='fr_FR' \
+	LOCALE_FR_UTF8='none' LOCALE_JA='none' \
+	LOCALE_ZH_CN='none' \
+	LOCALE_FR='fr_FR' LOCALE_FR_UTF8='none' \
+	LOCALE_JA='none' LOCALE_ZH_CN='none'
+
 subdir = .
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -51,7 +74,8 @@ if test -n '$(DISABLE_HARD_ERRORS)'; then \
   am__enable_hard_errors=no; \
 else \
   am__enable_hard_errors=yes; \
-fi;
+fi; \
+$(AM_TESTS_ENVIRONMENT) $(TESTS_ENVIRONMENT)
 am__set_TESTS_bases = \
   bases='$(TEST_LOGS)'; \
   bases=`for i in $$bases; do echo $$i; done | sed 's/\.log$$//'`; \
