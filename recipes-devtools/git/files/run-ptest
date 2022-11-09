@@ -6,25 +6,10 @@ PATH=$PATH:/usr/libexec/git-core:$(pwd)/tests/t/helper
 export PERL5LIB=/usr/share/perl5/
 export GIT_TEST_INSTALLED=$(pwd)/tests/t
 
-#skip t3434 case for ISO-2022-JP.so
-export GIT_SKIP_TESTS="t3434.3 t3434.6 t3900.17 t3900.25 t3900.27 t3900.28 t3900.29 t3900.37 t3900.38"
-
-#error: cannot convert from ISO-2022-JP to UTF-8
-export GIT_SKIP_TESTS="$GIT_SKIP_TESTS t5100.5"
-export GIT_SKIP_TESTS="$GIT_SKIP_TESTS t5100.24"
-export GIT_SKIP_TESTS="$GIT_SKIP_TESTS t8005.2 t8005.3 t8005.4"
-
-#no tkiff tools for yocto
-export GIT_SKIP_TESTS="$GIT_SKIP_TESTS t7800.28"
-
-#no iso-8859-7 
-export GIT_SKIP_TESTS="$GIT_SKIP_TESTS t9300.193 t9350.9"
-export GIT_SKIP_TESTS="$GIT_SKIP_TESTS t9350.26 t9350.27 t9350.43"
-export GIT_SKIP_TESTS="$GIT_SKIP_TESTS t9350.44"
-
-#Some of the tools only work in a windowed
-#environment.If run in a terminal-only session, they will fail.
-export GIT_SKIP_TESTS="$GIT_SKIP_TESTS t7610.28"
+export GIT_SKIP_TESTS="t2022.4 t3404.52 t4200.16 t4200.17 t4200.30 t5000.28 t1700.18 t1700.19"
+export GIT_SKIP_TESTS="$GIT_SKIP_TESTS t5100.21 t5100.24 t5100.31 t5304 t5400.12 t5801"
+export GIT_SKIP_TESTS="$GIT_SKIP_TESTS t6022.30 t6022.32 t6022.34 t6022.36 t6022.38 t6500.9 t6500.10"
+export GIT_SKIP_TESTS="$GIT_SKIP_TESTS t7508.112 t7701.4 t9300.117"
 
 cd tests/t
 
