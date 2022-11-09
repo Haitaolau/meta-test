@@ -1,9 +1,10 @@
 #!/bin/bash 
 
 
-PATH=$PATH:/usr/libexec/git-core
+PATH=$PATH:/usr/libexec/git-core:$(pwd)/tests/t/helper
 
 export PERL5LIB=/usr/share/perl5/
+export GIT_TEST_INSTALLED=$(pwd)/tests/t
 
 #skip t3434 case for ISO-2022-JP.so
 export GIT_SKIP_TESTS="t3434.3 t3434.6 t3900.17 t3900.25 t3900.27 t3900.28 t3900.29 t3900.37 t3900.38"
