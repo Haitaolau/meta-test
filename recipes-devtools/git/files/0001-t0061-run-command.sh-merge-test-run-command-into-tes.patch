@@ -1,0 +1,38 @@
+From ed76c279f909d5d26f9f56985e06e93b500352ba Mon Sep 17 00:00:00 2001
+From: Liu Haitao <haitao.liu@windriver.com>
+Date: Tue, 8 Nov 2022 19:20:05 -0800
+Subject: [PATCH] t0061-run-command.sh: merge test-run-command into test-tool
+
+As ae6a51f5a1 has removed the test-run-command, but two case
+were forgotten, so replace the test-run-command with test-tool run-command
+
+Signed-off-by: Liu Haitao <haitao.liu@windriver.com>
+---
+ t/t0061-run-command.sh | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/t/t0061-run-command.sh b/t/t0061-run-command.sh
+index d5f22ed..b9cfc03 100755
+--- a/t/t0061-run-command.sh
++++ b/t/t0061-run-command.sh
+@@ -18,7 +18,7 @@ test_expect_success 'start_command reports ENOENT (slash)' '
+ '
+ 
+ test_expect_success 'start_command reports ENOENT (no slash)' '
+-	test-run-command start-command-ENOENT does-not-exist
++	test-tool run-command start-command-ENOENT does-not-exist
+ '
+ 
+ test_expect_success 'run_command can run a command' '
+@@ -34,7 +34,7 @@ test_expect_success 'run_command is restricted to PATH' '
+ 	write_script should-not-run <<-\EOF &&
+ 	echo yikes
+ 	EOF
+-	test_must_fail test-run-command run-command should-not-run
++	test_must_fail test-tool run-command run-command should-not-run
+ '
+ 
+ test_expect_success !MINGW 'run_command can run a script without a #! line' '
+-- 
+2.35.1
+

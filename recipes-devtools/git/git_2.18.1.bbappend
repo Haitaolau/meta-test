@@ -1,5 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI += "file://run-ptest \
+            file://0001-t0061-run-command.sh-merge-test-run-command-into-tes.patch \
             "
 
 inherit ptest
