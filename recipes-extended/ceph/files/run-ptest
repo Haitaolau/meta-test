@@ -1,7 +1,15 @@
 #!/bin/bash 
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/ceph/
 
 cd tests 
-ln -s /usr/lib64/ceph/libceph-common.so.2 lib/libceph-common.so.2
+export CEPH_ROOT=.
+export CEPH_BUILD_DIR=.
+export CEPH_BIN=$CEPH_BUILD_DIR/bin
+export CEPH_LIB=$CEPH_BUILD_DIR/lib
+export PATH=$CEPH_BIN:$PATH
+export LD_LIBRARY_PATH=$CEPH_LIB
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/ceph/
+
+ctest
+#ln -s /usr/lib64/ceph/libceph-common.so.2 lib/libceph-common.so.2
 #pip3 install virtualenv  -i https://pypi.tuna.tsinghua.edu.cn/simple
