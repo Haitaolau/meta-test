@@ -1,0 +1,8 @@
+#!/bin/bash 
+
+cd tests
+export PKCS12_MANY_CERTS_FILE='cert-tests/data/pkcs12_5certs.p12'
+export CAFILE='cert-tests/data/ca-certs.pem'
+export GNUTLS_SYSTEM_PRIORITY_FILE='./system.prio' 
+
+make check-TESTS
