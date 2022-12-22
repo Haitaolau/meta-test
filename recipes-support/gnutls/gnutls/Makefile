@@ -359,7 +359,7 @@ am__EXEEXT_15 = tls13/supported_versions$(EXEEXT) \
 	set_x509_ocsp_multi_cli$(EXEEXT) kdf-api$(EXEEXT) \
 	keylog-func$(EXEEXT) handshake-write$(EXEEXT) \
 	x509cert-dntypes$(EXEEXT) id-on-xmppAddr$(EXEEXT) \
-	tls13-compat-mode$(EXEEXT) tls-channel-binding$(EXEEXT) \
+	tls13-compat-mode$(EXEEXT) tls-channel-binding$(EXEEXT) pkcs7-verify-double-free$(EXEEXT) \
 	$(am__EXEEXT_3) $(am__EXEEXT_4) $(am__EXEEXT_5) \
 	$(am__EXEEXT_6) $(am__EXEEXT_7) $(am__EXEEXT_8) \
 	$(am__EXEEXT_9) $(am__EXEEXT_10) $(am__EXEEXT_11) \
@@ -3472,6 +3472,14 @@ win32-certopenstore.log: win32-certopenstore$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+pkcs7-verify-double-free.log: pkcs7-verify-double-free$(EXEEXT)
+	@p='pkcs7-verify-double-free$(EXEEXT)'; \
+	b='pkcs7-verify-double-free'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+
 .sh.log:
 	@p='$<'; \
 	$(am__set_b); \
