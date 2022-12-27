@@ -1,0 +1,13 @@
+#!/bin/bash 
+
+if [ ! -x "/usr/sbin/fping" ] then
+	echo "Please instsll fping first."
+fi
+
+if [ -x "/usr/sbin/fping" ] && [ ! -x "/usr/sbin/fping6" ] 
+	ln -s /usr/sbin/fping /usr/sbin/fping6
+fi
+
+cd tests
+
+make check-TESTS top_srcdir=..
