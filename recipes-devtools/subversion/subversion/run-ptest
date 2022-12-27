@@ -2,4 +2,18 @@
 
 export LD_LIBRARY_PATH=/usr/lib64/subversion/ptest/subversion/tests/.libs
 
-make check
+#test -f subversion/svnadmin/svnadmin || ln -s /usr/bin/svnadmin subversion/svnadmin/svnadmin 
+#test -f subversion/svn/svn || ln -s /usr/bin/svn subversion/svn/svn
+#test -f subversion/svnversion/svnversion || ln -s /usr/bin/svnversion subversion/svnversion/svnversion
+
+if [ ! -d "subversion/svnserve/" ]; then
+	mkdir -p subversion/svnserve/
+fi
+test -f subversion/svnserve/svnserve || ln -s /usr/bin/svnserve subversion/svnserve/svnserve
+
+if [ ! -d "subversion/svnfsfs" ];then 
+	mkdir -p subversion/svnfsfs/
+fi
+test -f subversion/subversion/svnfsfs || ln -s /usr/bin/svnfsfs subversion/svnfsfs/svnfsfs
+make check SVN_BIN_DIR=/usr/bin
+
