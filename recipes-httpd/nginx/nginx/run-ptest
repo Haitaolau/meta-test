@@ -1,0 +1,5 @@
+#!/bin/bash 
+
+cd tests 
+
+TEST_NGINX_BINARY=/usr/sbin/nginx prove .
