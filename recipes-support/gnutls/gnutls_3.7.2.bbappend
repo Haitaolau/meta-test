@@ -7,7 +7,8 @@ inherit ptest
 
 do_compile_ptest() {
     cd tests
-	echo "check-cm: all-am\n\t\$(MAKE) \$(AM_MAKEFLAGS) \$(check_PROGRAMS) \$(dist_check_SCRIPTS)" >> Makefile
+	cat Makefile  |grep -1 ^install-am | sed 's/install-am/check-cm/g' |sed 's/install-exec-am/\$(check_PROGRAMS)/g' | sed 's/install-data-am/\$(dist_check_SCRIPTS)/g' >> Makefile
+    #echo "check-cm: all-am\n\t\$(MAKE) \$(AM_MAKEFLAGS) \$(check_PROGRAMS) \$(dist_check_SCRIPTS)" >> Makefile
 	make check-cm
 }
 
