@@ -1,0 +1,73 @@
+From 24b84e2d501813864ad7736b70f521196481bdd2 Mon Sep 17 00:00:00 2001
+From: Edward Thomson <ethomson@edwardthomson.com>
+Date: Sat, 19 Mar 2022 12:49:49 -0400
+Subject: [PATCH] clar: fix `-r` test reporting
+
+Signed-off-by: Liu Haitao <haitao.liu@windriver.com>
+---
+ tests/clar.c         | 12 +++++++++---
+ tests/clar/summary.h |  5 ++++-
+ 2 files changed, 13 insertions(+), 4 deletions(-)
+
+diff --git a/tests/clar.c b/tests/clar.c
+index ca508d073..22c1b146c 100644
+--- a/tests/clar.c
++++ b/tests/clar.c
+@@ -492,7 +492,7 @@ clar_parse_args(int argc, char **argv)
+ 		case 'r':
+ 			_clar.write_summary = 1;
+ 			free(_clar.summary_filename);
+-			_clar.summary_filename = strdup(*(argument + 2) ? (argument + 2) : "summary.xml");
++			_clar.summary_filename = *(argument + 2) ? strdup(argument + 2) : NULL;
+ 			break;
+ 
+ 		default:
+@@ -504,6 +504,8 @@ clar_parse_args(int argc, char **argv)
+ void
+ clar_test_init(int argc, char **argv)
+ {
++	const char *summary_env;
++
+ 	if (argc > 1)
+ 		clar_parse_args(argc, argv);
+ 
+@@ -513,11 +515,15 @@ clar_test_init(int argc, char **argv)
+ 		""
+ 	);
+ 
+-	if ((_clar.summary_filename = getenv("CLAR_SUMMARY")) != NULL) {
++	if (!_clar.summary_filename &&
++	    (summary_env = getenv("CLAR_SUMMARY")) != NULL) {
+ 		_clar.write_summary = 1;
+-		_clar.summary_filename = strdup(_clar.summary_filename);
++		_clar.summary_filename = strdup(summary_env);
+ 	}
+ 
++	if (_clar.write_summary && !_clar.summary_filename)
++		_clar.summary_filename = strdup("summary.xml");
++
+ 	if (_clar.write_summary &&
+ 	    !(_clar.summary = clar_summary_init(_clar.summary_filename))) {
+ 		clar_print_onabort("Failed to open the summary file\n");
+diff --git a/tests/clar/summary.h b/tests/clar/summary.h
+index 1af110efa..71253abd0 100644
+--- a/tests/clar/summary.h
++++ b/tests/clar/summary.h
+@@ -63,10 +63,13 @@ struct clar_summary *clar_summary_init(const char *filename)
+ 	struct clar_summary *summary;
+ 	FILE *fp;
+ 
+-	if ((fp = fopen(filename, "w")) == NULL)
++	if ((fp = fopen(filename, "w")) == NULL) {
++		perror("fopen");
+ 		return NULL;
++	}
+ 
+ 	if ((summary = malloc(sizeof(struct clar_summary))) == NULL) {
++		perror("malloc");
+ 		fclose(fp);
+ 		return NULL;
+ 	}
+-- 
+2.31.1
+
