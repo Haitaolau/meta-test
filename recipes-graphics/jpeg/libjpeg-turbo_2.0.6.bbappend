@@ -21,4 +21,4 @@ do_install_ptest() {
 }
 
 RDEPENDS_${PN} += "bash"
-RDEPENDS_${PN}-ptest += " bash"
+RDEPENDS_${PN}-ptest += " bash jpeg-tools"
