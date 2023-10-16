@@ -1,0 +1,116 @@
+From 0b5d0c17f7724d0cc9007ab22935eee2769efd72 Mon Sep 17 00:00:00 2001
+From: Liu Haitao <haitao.liu@windriver.com>
+Date: Sun, 25 Sep 2022 18:42:16 -0700
+Subject: [PATCH] ptest: modify the IMGDIR and EXEDIR variable
+
+Signed-off-by: Liu Haitao <haitao.liu@windriver.com>
+Signed-off-by: Haitao Liu <haitao.liu@windriver.com>
+---
+ tjbenchtest.in        | 6 +++---
+ tjbenchtest.java.in   | 6 +++---
+ tjexampletest.in      | 6 +++---
+ tjexampletest.java.in | 6 +++---
+ 4 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/tjbenchtest.in b/tjbenchtest.in
+index 1c08b37..b00ba13 100755
+--- a/tjbenchtest.in
++++ b/tjbenchtest.in
+@@ -21,9 +21,9 @@ runme()
+ 
+ EXT=bmp
+ IMAGES="vgl_5674_0098.${EXT} vgl_6434_0018a.${EXT} vgl_6548_0026a.${EXT} nightshot_iso_100.${EXT}"
+-IMGDIR=@CMAKE_CURRENT_SOURCE_DIR@/testimages
++IMGDIR=/usr/lib64/libjpeg-turbo/ptest/tests/testimages
+ OUTDIR=`mktemp -d /tmp/__tjbenchtest_output.XXXXXX`
+-EXEDIR=@CMAKE_CURRENT_BINARY_DIR@
++EXEDIR=/usr/bin
+ BMPARG=
+ NSARG=
+ YUVARG=
+@@ -72,7 +72,7 @@ while [ $# -gt 0 ]; do
+ 	shift
+ done
+ 
+-exec >$EXEDIR/tjbenchtest$YUVARG$ALLOCARG$PROGARG.log
++exec >/usr/lib64/libjpeg-turbo/ptest/tests/log/tjbenchtest$YUVARG$ALLOCARG$PROGARG.log
+ 
+ # Standard tests
+ for image in $IMAGES; do
+diff --git a/tjbenchtest.java.in b/tjbenchtest.java.in
+index 689561d..0ea1786 100755
+--- a/tjbenchtest.java.in
++++ b/tjbenchtest.java.in
+@@ -20,9 +20,9 @@ runme()
+ }
+ 
+ IMAGES="vgl_5674_0098.bmp vgl_6434_0018a.bmp vgl_6548_0026a.bmp nightshot_iso_100.bmp"
+-IMGDIR=@CMAKE_CURRENT_SOURCE_DIR@/testimages
++IMGDIR=/usr/lib64/libjpeg-turbo/ptest/tests/testimages
+ OUTDIR=`mktemp -d /tmp/__tjbenchtest_java_output.XXXXXX`
+-EXEDIR=@CMAKE_CURRENT_BINARY_DIR@
++EXEDIR=/usr/bin
+ JAVA="@Java_JAVA_EXECUTABLE@"
+ JAVAARGS="-cp $EXEDIR/java/turbojpeg.jar -Djava.library.path=$EXEDIR"
+ BMPARG=
+@@ -66,7 +66,7 @@ while [ $# -gt 0 ]; do
+ 	shift
+ done
+ 
+-exec >$EXEDIR/tjbenchtest-java$YUVARG$PROGARG.log
++exec >/usr/lib64/libjpeg-turbo/ptest/tests/log/tjbenchtest-java$YUVARG$PROGARG.log
+ 
+ # Standard tests
+ for image in $IMAGES; do
+diff --git a/tjexampletest.in b/tjexampletest.in
+index 0d3047e..0607715 100755
+--- a/tjexampletest.in
++++ b/tjexampletest.in
+@@ -20,16 +20,16 @@ runme()
+ }
+ 
+ IMAGES="vgl_5674_0098.bmp vgl_6434_0018a.bmp vgl_6548_0026a.bmp nightshot_iso_100.bmp"
+-IMGDIR=@CMAKE_CURRENT_SOURCE_DIR@/testimages
++IMGDIR=/usr/lib64/libjpeg-turbo/ptest/tests/testimages
+ OUTDIR=`mktemp -d /tmp/__tjexampletest_output.XXXXXX`
+-EXEDIR=@CMAKE_CURRENT_BINARY_DIR@
++EXEDIR=/usr/bin
+ 
+ if [ -d $OUTDIR ]; then
+ 	rm -rf $OUTDIR
+ fi
+ mkdir -p $OUTDIR
+ 
+-exec >$EXEDIR/tjexampletest.log
++exec >/usr/lib64/libjpeg-turbo/ptest/tests/log/tjexampletest.log
+ 
+ for image in $IMAGES; do
+ 
+diff --git a/tjexampletest.java.in b/tjexampletest.java.in
+index d4b63bc..1d41753 100755
+--- a/tjexampletest.java.in
++++ b/tjexampletest.java.in
+@@ -20,9 +20,9 @@ runme()
+ }
+ 
+ IMAGES="vgl_5674_0098.bmp vgl_6434_0018a.bmp vgl_6548_0026a.bmp nightshot_iso_100.bmp"
+-IMGDIR=@CMAKE_CURRENT_SOURCE_DIR@/testimages
++IMGDIR=/usr/lib64/libjpeg-turbo/ptest/tests/testimages
+ OUTDIR=`mktemp -d /tmp/__tjexampletest_java_output.XXXXXX`
+-EXEDIR=@CMAKE_CURRENT_BINARY_DIR@
++EXEDIR=/usr/bin
+ JAVA="@Java_JAVA_EXECUTABLE@"
+ JAVAARGS="-cp $EXEDIR/java/turbojpeg.jar -Djava.library.path=$EXEDIR"
+ 
+@@ -31,7 +31,7 @@ if [ -d $OUTDIR ]; then
+ fi
+ mkdir -p $OUTDIR
+ 
+-exec >$EXEDIR/tjexampletest-java.log
++exec >/usr/lib64/libjpeg-turbo/ptest/tests/log/tjexampletest-java.log
+ 
+ for image in $IMAGES; do
+ 
+-- 
+2.25.1
+
