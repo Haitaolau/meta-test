@@ -1,0 +1,5 @@
+#!/bin/bash 
+
+cd avahi-core
+
+make check-TESTS
