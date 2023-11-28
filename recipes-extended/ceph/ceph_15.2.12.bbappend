@@ -64,6 +64,7 @@ do_install_ptest(){
 
 }
 
+EXTRA_OECMAKE += "-DWITH_TESTS=ON"
 
 RDEPENDS_${PN}-ptest += "bash"
 RDEPENDS_${PN}-ptest += "python3-pip"

@@ -1,0 +1,7 @@
+#!/bin/sh 
+
+cd tests
+
+export CLAR_SUMMARY="${PWD}/results.xml"
+
+./libgit2_clar | sed -e 's|ok .* - # SKIP|SKIP:|' -e 's|not ok .* -|FAIL:|'  -e 's|ok .* -|PASS:|' 
